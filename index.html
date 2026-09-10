@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamy Bloomy - ร้านดอกไม้บายฝัน</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ff85a1;
+            --secondary-pink: #fbb1bd;
+            --accent-purple: #c77dff;
+            --bg-pastel: #fff0f5;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --dark-text: #5c3d46;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Mitr', 'Sarabun', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe6eb 0%, #e8dff5 100%);
+            color: var(--dark-text);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(255, 133, 161, 0.2);
+            border: 2px solid #fff;
+        }
+
+        header h1 {
+            color: #d80056;
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header p {
+            color: #a20040;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        @media(min-width: 768px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .full-width {
+                grid-column: span 2;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 2px solid #ffffff;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card h2 {
+            color: #b5179e;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px dashed #fbb1bd;
+            padding-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input[type="text"], input[type="url"], textarea, input[type="file"] {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #f0c3d4;
+            border-radius: 12px;
+            outline: none;
+            font-size: 0.95rem;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="url"]:focus, textarea:focus {
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 8px rgba(255, 133, 161, 0.3);
+        }
+
+        button {
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(255, 117, 140, 0.4);
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #ff4e6a, #ff6b9d);
+            transform: scale(1.02);
+        }
+
+        /* Loyalty Badge & Stamp Section */
+        .stamp-box {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .stamp {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px dashed #ff85a1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #ccc;
+            background: #fff;
+        }
+
+        .stamp.active {
+            background: #ff85a1;
+            color: white;
+            border-style: solid;
+            box-shadow: 0 0 10px rgba(255, 133, 161, 0.5);
+        }
+
+        /* ID Cards Preview Styling */
+        .badge-card {
+            background: linear-gradient(135deg, #fff0f3 0%, #f7d6e0 100%);
+            border: 2px solid #ffb3c1;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .badge-card.vip {
+            background: linear-gradient(135deg, #4d194d 0%, #270082 100%);
+            color: #f72585;
+            border: 2px solid #7209b7;
+        }
+
+        .badge-card.vip h3, .badge-card.vip p {
+            color: #fff;
+        }
+
+        .badge-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid #fff;
+            background: #eee;
+        }
+
+        .badge-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .badge-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .fb-btn {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 5px 12px;
+            background: #1877f2;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.8rem;
+        }
+
+        /* Review List */
+        .review-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.03);
+            border-left: 4px solid var(--primary-pink);
+        }
+
+        .review-img {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 8px;
+            margin-top: 10px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🌸 Dreamy Bloomy 🌸</h1>
+        <p>ร้านดอกไม้บายฝัน - ส่งมอบความรู้สึกดีๆ ด้วยดอกไม้สวยงาม</p>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. ช่องสะสมแต้มอัตโนมัติ -->
+        <div class="card">
+            <h2>💖 สะสมแต้มลูกค้า</h2>
+            <p style="font-size: 0.85rem; color: #777; margin-bottom: 10px;">พิมพ์ชื่อลูกค้า ระบบจะค้นหา หรือสร้างชื่อใหม่อัตโนมัติ พร้อมเพิ่มแต้มให้เลย!</p>
+            
+            <div class="form-group">
+                <label for="point-name">ชื่อลูกค้า:</label>
+                <input type="text" id="point-name" placeholder="ระบุชื่อลูกค้า...">
+            </div>
+            <button onclick="addPoint()">+ สะสมแต้ม (+1 แต้ม)</button>
+
+            <div id="point-result" style="display:none; margin-top: 15px; text-align: center;">
+                <h3 id="display-customer-name" style="color: #b5179e;"></h3>
+                <p id="display-status" style="font-size: 0.9rem; font-weight: bold;"></p>
+                <div class="stamp-box" id="stamps-container"></div>
+                <p id="reward-text" style="color: #d80056; font-size: 0.85rem;"></p>
+            </div>
+        </div>
+
+        <!-- 2. ตรวจสอบบัตร VIP -->
+        <div class="card">
+            <h2>👑 บัตร VIP ลูกค้า</h2>
+            <div class="form-group">
+                <label for="vip-input-name">กรอกชื่อลูกค้า VIP:</label>
+                <input type="text" id="vip-input-name" placeholder="ชื่อลูกค้า">
+            </div>
+            <div class="form-group">
+                <label for="vip-img-input">อัปโหลดรูปโปรไฟล์ VIP:</label>
+                <input type="file" id="vip-img-input" accept="image/*" onchange="previewImage(event, 'vip-preview-img')">
+            </div>
+            <button onclick="generateVIPCard()">สร้าง / แสดงบัตร VIP</button>
+
+            <div id="vip-card-display" class="badge-card vip" style="display: none;">
+                <img id="vip-preview-img" class="badge-avatar" src="https://via.placeholder.com/80?text=VIP" alt="VIP Photo">
+                <div class="badge-info">
+                    <h3 id="vip-card-name">ชื่อ: -</h3>
+                    <p>✨ สมาชิก VIP (Dreamy Bloomy)</p>
+                    <p style="font-size: 0.75rem; color: #ffd166;">ได้รับสิทธิพิเศษ สุ่มของขวัญฟรี!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. ช่องบัตรพนักงาน + ลิงค์ Facebook -->
+        <div class="card">
+            <h2>🪪 บัตรประจำตัวพนักงาน</h2>
+            <div class="form-group">
+                <label for="emp-name">ชื่อพนักงาน:</label>
+                <input type="text" id="emp-name" placeholder="ชื่อ-นามสกุล">
+            </div>
+            <div class="form-group">
+                <label for="emp-pos">ตำแหน่ง:</label>
+                <input type="text" id="emp-pos" placeholder="เช่น ช่างจัดดอกไม้, แอดมิน">
+            </div>
+            <div class="form-group">
+                <label for="emp-fb">ลิงก์ Facebook:</label>
+                <input type="url" id="emp-fb" placeholder="https://facebook.com/username">
+            </div>
+            <div class="form-group">
+                <label for="emp-img-input">อัปโหลดรูปพนักงาน:</label>
+                <input type="file" id="emp-img-input" accept="image/*" onchange="previewImage(event, 'emp-preview-img')">
+            </div>
+            <button onclick="generateEmpCard()">สร้างบัตรพนักงาน</button>
+
+            <div id="emp-card-display" class="badge-card" style="display: none;">
+                <img id="emp-preview-img" class="badge-avatar" src="https://via.placeholder.com/80?text=Staff" alt="Staff Photo">
+                <div class="badge-info">
+                    <h3 id="emp-card-name">ชื่อ พนักงาน</h3>
+                    <p id="emp-card-pos">ตำแหน่ง</p>
+                    <a id="emp-card-fb" class="fb-btn" href="#" target="_blank">Facebook โปรไฟล์</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. ช่องรีวิว (ทุกคนพิมพ์ + เพิ่มรูปเองได้) -->
+        <div class="card">
+            <h2>📝 รีวิวจากลูกค้า</h2>
+            <div class="form-group">
+                <label for="rev-name">ชื่อของคุณ:</label>
+                <input type="text" id="rev-name" placeholder="ใส่ชื่อของคุณ">
+            </div>
+            <div class="form-group">
+                <label for="rev-text">ข้อความรีวิว:</label>
+                <textarea id="rev-text" rows="3" placeholder="ประทับใจบริการหรือดอกไม้ช่อไหน พิมพ์บอกเราได้เลย..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="rev-img-input">แนบรูปรีวิว (ถ้ามี):</label>
+                <input type="file" id="rev-img-input" accept="image/*">
+            </div>
+            <button onclick="addReview()">ส่งรีวิว</button>
+        </div>
+
+        <!-- รายการรีวิวทั้งหมด -->
+        <div class="card full-width">
+            <h2>💬 รีวิวทั้งหมดจากลูกค้า</h2>
+            <div id="reviews-list">
+                <div class="review-item">
+                    <strong>คุณสิบทิศ (ลูกค้า VIP)</strong>
+                    <p>ดอกไม้สด สวยงามมาก จัดช่อหรูหราตรงปกมากๆ ครับ ประทับใจมาก!</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ฐานข้อมูลสะสมแต้มจำลอง (เซฟใน Memory)
+        const customerPoints = {};
+
+        // 1. ฟังก์ชันเพิ่มแต้มสะสม
+        function addPoint() {
+            const nameInput = document.getElementById('point-name').value.trim();
+            if (!nameInput) {
+                alert('กรุณากรอกชื่อลูกค้า');
+                return;
+            }
+
+            // ถ้ายังไม่มีชื่อ ให้เริ่มที่ 0
+            if (!customerPoints[nameInput]) {
+                customerPoints[nameInput] = 0;
+            }
+
+            // เพิ่มแต้ม +1
+            customerPoints[nameInput] += 1;
+            const currentPoints = customerPoints[nameInput];
+
+            // แสดงผล
+            document.getElementById('point-result').style.display = 'block';
+            document.getElementById('display-customer-name').innerText = 'ลูกค้า: ' + nameInput;
+
+            // คำนวณสถานะ VIP & ของขวัญ
+            let statusText = 'สมาชิกทั่วไป';
+            let rewardText = '';
+
+            if (currentPoints >= 10) {
+                statusText = '👑 VIP Level 2 (สะสมครบ 10 ครั้ง)';
+                rewardText = '🎁 ได้รับสิทธิ์: รับบัตร VIP + สุ่มของขวัญฟรี 2 ชิ้น!';
+            } else if (currentPoints >= 5) {
+                statusText = '⭐ VIP Level 1 (สะสมครบ 5 ครั้ง)';
+                rewardText = '🎁 ได้รับสิทธิ์: รับบัตร VIP + สุ่มของขวัญฟรี 1 ชิ้น!';
+            } else if (currentPoints >= 3) {
+                rewardText = '🎉 สะสมครบ 3 ครั้งแล้ว!';
+            }
+
+            document.getElementById('display-status').innerText = 'สถานะ: ' + statusText;
+            document.getElementById('reward-text').innerText = rewardText;
+
+            // วาดจุดแต้ม (สูงสุด 10 แต้ม)
+            const stampsContainer = document.getElementById('stamps-container');
+            stampsContainer.innerHTML = '';
+            for (let i = 1; i <= 10; i++) {
+                const stamp = document.createElement('div');
+                stamp.className = 'stamp ' + (i <= currentPoints ? 'active' : '');
+                stamp.innerText = i <= currentPoints ? '🌸' : i;
+                stampsContainer.appendChild(stamp);
+            }
+        }
+
+        // 2. ฟังก์ชันแสดง preview รูปภาพ
+        function previewImage(event, targetId) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById(targetId);
+                output.src = reader.result;
+            };
+            if(event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+
+        // 3. ฟังก์ชันสร้างบัตร VIP
+        function generateVIPCard() {
+            const name = document.getElementById('vip-input-name').value.trim();
+            if (!name) {
+                alert('กรุณากรอกชื่อลูกค้า');
+                return;
+            }
+            document.getElementById('vip-card-name').innerText = 'ชื่อ: ' + name;
+            document.getElementById('vip-card-display').style.display = 'flex';
+        }
+
+        // 4. ฟังก์ชันสร้างบัตรพนักงาน
+        function generateEmpCard() {
+            const name = document.getElementById('emp-name').value.trim();
+            const pos = document.getElementById('emp-pos').value.trim();
+            const fb = document.getElementById('emp-fb').value.trim();
+
+            if (!name || !pos) {
+                alert('กรุณากรอกชื่อและตำแหน่งพนักงาน');
+                return;
+            }
+
+            document.getElementById('emp-card-name').innerText = name;
+            document.getElementById('emp-card-pos').innerText = 'ตำแหน่ง: ' + pos;
+            
+            const fbBtn = document.getElementById('emp-card-fb');
+            if (fb) {
+                fbBtn.href = fb;
+                fbBtn.style.display = 'inline-block';
+            } else {
+                fbBtn.style.display = 'none';
+            }
+
+            document.getElementById('emp-card-display').style.display = 'flex';
+        }
+
+        // 5. ฟังก์ชันเพิ่มรีวิว (พร้อมรูป)
+        function addReview() {
+            const name = document.getElementById('rev-name').value.trim();
+            const text = document.getElementById('rev-text').value.trim();
+            const imgInput = document.getElementById('rev-img-input');
+
+            if (!name || !text) {
+                alert('กรุณากรอกชื่อและข้อความรีวิว');
+                return;
+            }
+
+            const reviewList = document.getElementById('reviews-list');
+            const reviewDiv = document.createElement('div');
+            reviewDiv.className = 'review-item';
+
+            let reviewHTML = `<strong>${name}</strong><p>${text}</p>`;
+
+            // เช็คว่ามีการแนบรูปไหม
+            if (imgInput.files && imgInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    reviewHTML += `<img src="${e.target.result}" class="review-img" alt="รูปรีวิว">`;
+                    reviewDiv.innerHTML = reviewHTML;
+                    reviewList.prepend(reviewDiv);
+                };
+                reader.readAsDataURL(imgInput.files[0]);
+            } else {
+                reviewDiv.innerHTML = reviewHTML;
+                reviewList.prepend(reviewDiv);
+            }
+
+            // ล้างค่าฟอร์ม
+            document.getElementById('rev-name').value = '';
+            document.getElementById('rev-text').value = '';
+            document.getElementById('rev-img-input').value = '';
+
+            alert('ขอบคุณสำหรับรีวิวค่ะ!');
+        }
+    </script>
+</body>
+</html>
